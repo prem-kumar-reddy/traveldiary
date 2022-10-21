@@ -17,10 +17,10 @@ const authCtrl = {
             if(password.length < 6)
             return res.status(400).json({msg: "Password must be at least 6 characters."})
 
-            const passwordHash = await bcrypt.hash(password, 12)
+            // const passwordHash = await bcrypt.hash(password, 12)
 
             const newUser = new Users({
-                fullname, username: newUserName, email, password: passwordHash, gender
+                fullname, username: newUserName, email, password: password, gender
             })
 
 
@@ -56,7 +56,7 @@ const authCtrl = {
 
             if(!user) return res.status(400).json({msg: "This email does not exist."})
 
-            const isMatch = await bcrypt.compare(password, user.password)
+            const isMatch = password===user.password  //await bcrypt.compare(password, user.password)
             if(!isMatch) return res.status(400).json({msg: "Password is incorrect."})
 
             const access_token = createAccessToken({id: user._id})
