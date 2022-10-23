@@ -3,34 +3,34 @@ import { getDataAPI, patchDataAPI } from '../../utils/fetchData'
 import { imageUpload } from '../../utils/imageUpload'
 import { createNotify, removeNotify } from '../actions/notifyAction'
 
-const Redis = require('redis')
+// const Redis = require('redis')
 
-let redisPort = 6379;  // Replace with your redis port
-let redisHost = "127.0.0.1";  // Replace with your redis host
-const client = Redis.createClient({
-    socket: {
-      port: redisPort,
-      host: redisHost,
-    }
-  });
+// let redisPort = 6379;  // Replace with your redis port
+// let redisHost = "127.0.0.1";  // Replace with your redis host
+// const client = Redis.createClient({
+//     socket: {
+//       port: redisPort,
+//       host: redisHost,
+//     }
+//   });
 
-(async () => {
-    // Connect to redis server
-    await client.connect();
-})();
+// (async () => {
+//     // Connect to redis server
+//     await client.connect();
+// })();
 
 
-console.log("Attempting to connect to redis");
-client.on('connect', () => {
-    console.log('Connected!');
-});
+// console.log("Attempting to connect to redis");
+// client.on('connect', () => {
+//     console.log('Connected!');
+// });
 
-// Log any error that may occur to the console
-client.on("error", (err) => {
-    console.log(`Error:${err}`);
-});
+// // Log any error that may occur to the console
+// client.on("error", (err) => {
+//     console.log(`Error:${err}`);
+// });
 
-const DEFAULT_EXPIRATION = 3600
+// const DEFAULT_EXPIRATION = 3600
 
 export const POST_TYPES = {
     CREATE_POST: 'CREATE_POST',
@@ -41,17 +41,17 @@ export const POST_TYPES = {
     DELETE_POST: 'DELETE_POST'
 }
 
-function  getOrSetCache(key,cb){
-    return new Promise((resolve,reject)=>{
-        client.get(key,async (error,data)=>{
-            if (error) return reject(error)
-            if (data!=null) return resolve(JSON.parse(data))
-            const freshData = await cb()
-            client.setEx(key,JSON.stringify(freshData))
-            resolve(freshData)
-        })
-    })
-}
+// function  getOrSetCache(key,cb){
+//     return new Promise((resolve,reject)=>{
+//         client.get(key,async (error,data)=>{
+//             if (error) return reject(error)
+//             if (data!=null) return resolve(JSON.parse(data))
+//             const freshData = await cb()
+//             client.setEx(key,JSON.stringify(freshData))
+//             resolve(freshData)
+//         })
+//     })
+// }
 
 
 export const PROFILE_TYPES = {
