@@ -42,7 +42,7 @@ const postCtrl = {
     createPost: async (req, res) => {
         try {
             const { content, placeName, type, images } = req.body
-            console(req.params)
+            // console(req.params)
             if(images.length === 0)
             return res.status(400).json({msg: "Please add your photo."})
 
